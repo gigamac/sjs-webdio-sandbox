@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "plugins": [
+            {
+                "transform": "ts-auto-mock/transformer",
+                "cacheBetweenTests": false,
+                "features": [
+                    "random"
+                ]
+            }
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        
+    ]
+}

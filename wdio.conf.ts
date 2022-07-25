@@ -1,9 +1,12 @@
-import isCI = require('is-ci');
+// import isCI = require('is-ci');
+import isCI from 'is-ci';
 
 import { ConsoleReporter } from '@serenity-js/console-reporter';
 import { ArtifactArchiver } from '@serenity-js/core';
 import { SerenityBDDReporter } from '@serenity-js/serenity-bdd';
-import { Photographer, TakePhotosOfInteractions, WebdriverIOConfig } from '@serenity-js/webdriverio';
+import { WebdriverIOConfig } from '@serenity-js/webdriverio';
+// import { Photographer, TakePhotosOfInteractions } from ;
+import { Photographer, TakePhotosOfInteractions } from '@serenity-js/web';
 
 import { Actors } from './test';
 
@@ -111,7 +114,7 @@ export const config: WebdriverIOConfig = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'error',
     //
     // Set specific log levels per logger
     // loggers:
@@ -135,6 +138,7 @@ export const config: WebdriverIOConfig = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
+    // baseUrl: 'http://localhost:9003/',
     baseUrl: 'https://the-internet.herokuapp.com/',
     //
     // Default timeout for all waitFor* commands.
@@ -187,7 +191,7 @@ export const config: WebdriverIOConfig = {
         // <number> timeout for step definitions
         timeout: 60000,
         // <boolean> Fail if there are any undefined or pending steps.
-        strict: false
+        // strict: false
     },
     
     //
