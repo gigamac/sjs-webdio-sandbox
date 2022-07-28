@@ -17,10 +17,10 @@ Feature: querying a mock page
     to better describe each `Feature` and `Scenario`.
 
     Then he should see that "<object>" has value
-    """
-    <value>
-    """
+      """
+      <value>
+      """
 
     Examples:
-      | object | value            |
-      | window | {"pants": "large"} |
+      | object                  | value  |
+      | foodieObject.menu.carbs | potato |

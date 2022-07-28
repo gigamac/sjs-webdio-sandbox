@@ -55,7 +55,7 @@ export const config: WebdriverIOConfig = {
     // then the current working directory is where your `package.json` resides, so `wdio`
     // will be called from there.
     specs: [
-        './features/**/*.feature'
+        './features/mockpage/*.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -139,8 +139,8 @@ export const config: WebdriverIOConfig = {
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
     // baseUrl: 'http://localhost:9003/',
-    baseUrl: 'https://the-internet.herokuapp.com/',
-    // baseUrl: 'http://localhost:9005/',
+    // baseUrl: 'https://the-internet.herokuapp.com/',
+    baseUrl: 'http://localhost:9005/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -156,7 +156,7 @@ export const config: WebdriverIOConfig = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
+    services: ['chromeDriver'],
 
     //
     // The number of times to retry the entire specfile when it fails as a whole

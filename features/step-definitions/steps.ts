@@ -7,7 +7,8 @@ import { ExecuteScript, LastScriptExecution, Navigate, Page } from '@serenity-js
 import { Authenticate, VerifyAuthentication } from '../../test/authentication';
 import { PickExample } from '../../test/examples';
 import { Ensure } from '@serenity-js/assertions/lib/Ensure';
-import { equals, isTrue } from '@serenity-js/assertions';
+import { equals } from '@serenity-js/assertions/lib/expectations/equals';
+import { isTrue } from '@serenity-js/assertions';
 import _ = require('lodash');
 import { isEqual } from 'lodash';
 /**
@@ -25,7 +26,7 @@ Given('{actor} starts with the {string} example', async (actor: Actor, exampleNa
 
 Given('{actor} opens {string}', async (actor: Actor, localPath: string) =>
     actor.attemptsTo(
-        Navigate.to(`http://localhost:9005${localPath}`),
+        Navigate.to(localPath),
     )
 );
 
@@ -51,18 +52,28 @@ Then('{pronoun} should see that authentication has {word}', async (pronoun, expe
 
 Then('{pronoun} should see that {string} has value', async (pronoun, theObjectString: string, theValue: string) => {
     console.log('<+++ objectString  ++>', theValue);
-    const theObject: object = JSON.parse(theValue);
-    console.log('<+++ the parsed object :', theObject);
     actorInTheSpotlight().attemptsTo(
-        ExecuteScript.async(() => {
-            return {
-                theCarbs: foodieObject.menu.carbs
-            }
-        }),
-    );
-    actorInTheSpotlight().attemptsTo(
-        // Ensure.that(isEqual(LastScriptExecution.result<{ theCarbs: string }>().theCarbs, 'gnocci'), isTrue()),
-        Ensure.that(LastScriptExecution.result<{ theCarbs: string }>().theCarbs, equals('gnocci')),
+        //sync returns a value, but ensure isnt executed
+        ExecuteScript.sync(`return { theValue: ${theObjectString}}`),
+        //async with return times out
+        // ExecuteScript.async(() => {
+        //     return {
+        //         theValue: theObjectString
+        //     }
+        // }),
+
+        // async with callback times out
+        // ExecuteScript.async(`() => {
+        //     var theObjectString = arguments[0];
+             
+        //     callback({
+        //         theValue: theObjectString
+        //     })
+        // }`).withArguments(theObjectString),
+
+
+        // Ensure.that(isEqual(LastScriptExecution.result<string>().theValue, theValue), isTrue()),
+        Ensure.that(LastScriptExecution.result<{ theValue: string }>().theValue, equals(theValue)),
     );
 }
 );

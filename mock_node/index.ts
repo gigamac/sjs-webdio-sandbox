@@ -13,7 +13,6 @@ server.register(cookie, {} as FastifyCookieOptions);
 
 server.get('/mockpage', async(req: any, reply: { header: (arg0: string, arg1: string) => void; send: (arg0: string) => void; }) => {
     reply.header('Content-Type','text/html');
-    reply.header('cookies','sessionId=128ue9qhw8dgqw8');
     const html = `<!DOCTYPE html><html>
 	<head>
     <script type="text/javascript" id="mealScript">
