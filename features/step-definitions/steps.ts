@@ -8,9 +8,7 @@ import { Authenticate, VerifyAuthentication } from '../../test/authentication';
 import { PickExample } from '../../test/examples';
 import { Ensure } from '@serenity-js/assertions/lib/Ensure';
 import { equals } from '@serenity-js/assertions/lib/expectations/equals';
-import { isTrue, includes } from '@serenity-js/assertions';
-import _ = require('lodash');
-import { isEqual } from 'lodash';
+import { isTrue } from '@serenity-js/assertions';
 /**
  * Below step definitions use Cucumber Expressions
  * see: https://cucumber.io/docs/cucumber/cucumber-expressions/
@@ -58,7 +56,6 @@ Then('{pronoun} should run a script', (pronoun)=>
 );
 
 Then('{pronoun} should see that {string} has value', (pronoun, theObjectString: string, expectedValue: string) => {
-    // console.log('<+++ objectString  ++>', `return {theValue: ${theObjectString}`);
     actorInTheSpotlight().attemptsTo(
         Ensure.that(LastScriptExecution.result<{ theValue: string }>().theValue, equals(expectedValue)),
     );
