@@ -16,7 +16,10 @@ Feature: querying a mock page
     Note: With **Serenity/JS** you can use [Markdown](https://en.wikipedia.org/wiki/Markdown)
     to better describe each `Feature` and `Scenario`.
 
-    Then he should see that "<object>" has value
+
+    Then he should run a script
+
+    And he should see that "<object>" has value
       """
       <value>
       """

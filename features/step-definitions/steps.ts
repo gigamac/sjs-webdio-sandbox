@@ -8,7 +8,7 @@ import { Authenticate, VerifyAuthentication } from '../../test/authentication';
 import { PickExample } from '../../test/examples';
 import { Ensure } from '@serenity-js/assertions/lib/Ensure';
 import { equals } from '@serenity-js/assertions/lib/expectations/equals';
-import { isTrue } from '@serenity-js/assertions';
+import { isTrue, includes } from '@serenity-js/assertions';
 import _ = require('lodash');
 import { isEqual } from 'lodash';
 /**
@@ -45,35 +45,22 @@ When('{pronoun} log(s) in using {string} and {string}', async (actor: Actor, use
  *  see: https://serenity-js.org/modules/core/function/index.html#static-function-actorInTheSpotlight
  */
 Then('{pronoun} should see that authentication has {word}', async (pronoun, expectedOutcome) =>
-    actorInTheSpotlight().attemptsTo(
+    {actorInTheSpotlight().attemptsTo(
         VerifyAuthentication[expectedOutcome](),
+    )}
+);
+
+Then('{pronoun} should run a script', (pronoun)=>
+    actorInTheSpotlight().attemptsTo(
+        ExecuteScript.sync(`return { theValue: foodieObject.menu.carbs}`),
+        Ensure.that(LastScriptExecution.result<{ theValue: string }>().isPresent(), isTrue())
     )
 );
 
-Then('{pronoun} should see that {string} has value', async (pronoun, theObjectString: string, theValue: string) => {
-    console.log('<+++ objectString  ++>', theValue);
+Then('{pronoun} should see that {string} has value', (pronoun, theObjectString: string, expectedValue: string) => {
+    // console.log('<+++ objectString  ++>', `return {theValue: ${theObjectString}`);
     actorInTheSpotlight().attemptsTo(
-        //sync returns a value, but ensure isnt executed
-        ExecuteScript.sync(`return { theValue: ${theObjectString}}`),
-        //async with return times out
-        // ExecuteScript.async(() => {
-        //     return {
-        //         theValue: theObjectString
-        //     }
-        // }),
-
-        // async with callback times out
-        // ExecuteScript.async(`() => {
-        //     var theObjectString = arguments[0];
-             
-        //     callback({
-        //         theValue: theObjectString
-        //     })
-        // }`).withArguments(theObjectString),
-
-
-        // Ensure.that(isEqual(LastScriptExecution.result<string>().theValue, theValue), isTrue()),
-        Ensure.that(LastScriptExecution.result<{ theValue: string }>().theValue, equals(theValue)),
+        Ensure.that(LastScriptExecution.result<{ theValue: string }>().theValue, equals(expectedValue)),
     );
 }
 );
