@@ -17,13 +17,11 @@ Feature: querying a mock page
     to better describe each `Feature` and `Scenario`.
 
 
-    Then he should run a script
+    Then he should run a script to retrieve object "<objectKey>"
 
-    And he should see that "<object>" has value
-      """
-      <value>
-      """
+    And he should see the object has value "<value>"
 
     Examples:
-      | object                  | value  |
-      | foodieObject.menu.carbs | potato |
+      | objectKey               | value  |
+#      | foodieObject.menu.carbs | potato |
+      | foodieObject.menu.carbs | gnocci |

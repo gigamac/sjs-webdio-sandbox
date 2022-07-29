@@ -48,14 +48,14 @@ Then('{pronoun} should see that authentication has {word}', async (pronoun, expe
     )}
 );
 
-Then('{pronoun} should run a script', (pronoun)=>
+Then('{pronoun} should run a script to retrieve object {string}', (pronoun, objectKey: string)=>
     actorInTheSpotlight().attemptsTo(
-        ExecuteScript.sync(`return { theValue: foodieObject.menu.carbs}`),
+        ExecuteScript.sync(`return { theValue: ${objectKey}}`),
         Ensure.that(LastScriptExecution.result<{ theValue: string }>().isPresent(), isTrue())
     )
 );
 
-Then('{pronoun} should see that {string} has value', (pronoun, theObjectString: string, expectedValue: string) => {
+Then('{pronoun} should see the object has value {string}', (pronoun, expectedValue: string) => {
     actorInTheSpotlight().attemptsTo(
         Ensure.that(LastScriptExecution.result<{ theValue: string }>().theValue, equals(expectedValue)),
     );
