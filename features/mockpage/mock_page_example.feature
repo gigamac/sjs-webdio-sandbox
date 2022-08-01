@@ -23,5 +23,5 @@ Feature: querying a mock page
 
     Examples:
       | objectKey               | value  |
-#      | foodieObject.menu.carbs | potato |
+      | foodieObject.menu.carbs | potato |
       | foodieObject.menu.carbs | gnocci |

@@ -55,10 +55,9 @@ Then('{pronoun} should run a script to retrieve object {string}', (pronoun, obje
     )
 );
 
-Then('{pronoun} should see the object has value {string}', (pronoun, expectedValue: string) => {
-    actorInTheSpotlight().attemptsTo(
+Then('{pronoun} should see the object has value {string}', (pronoun, expectedValue: string) => 
+     actorInTheSpotlight().attemptsTo(
         Ensure.that(LastScriptExecution.result<{ theValue: string }>().theValue, equals(expectedValue)),
-    );
-}
+    )
 );
 
