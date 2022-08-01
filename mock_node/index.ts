@@ -1,7 +1,6 @@
 import { fastify } from 'fastify';
 import { FastifyCookieOptions } from '@fastify/cookie';
 import cookie from '@fastify/cookie';
-import { createMock } from 'ts-auto-mock';
 import _ from 'lodash';
 
 const server = fastify({
@@ -58,11 +57,10 @@ server.get('/mockpage', async(req: any, reply: { header: (arg0: string, arg1: st
 	</body>
 </html>`;
 reply.send(html);
-    // return html;
   });
 
 
-server.listen(9005, (err) => {
+server.listen(9005, (err: any) => {
     if (err) {
         console.error(err);
         process.exit(1);

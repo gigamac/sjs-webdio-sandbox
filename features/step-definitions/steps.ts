@@ -9,6 +9,7 @@ import { PickExample } from '../../test/examples';
 import { Ensure } from '@serenity-js/assertions/lib/Ensure';
 import { equals } from '@serenity-js/assertions/lib/expectations/equals';
 import { isTrue } from '@serenity-js/assertions';
+
 /**
  * Below step definitions use Cucumber Expressions
  * see: https://cucumber.io/docs/cucumber/cucumber-expressions/
@@ -62,3 +63,11 @@ Then('{pronoun} should see the object has value {string}', (pronoun, expectedVal
     )
 );
 
+Then('{pronoun} should run a script to retrieve object {string} with:', (pronoun:Actor, objectKey: string, expectedJson:string) =>
+    actorInTheSpotlight().attemptsTo(
+        Ensure.that(typeof JSON.parse(expectedJson) === 'object', isTrue()),
+        ExecuteScript.sync(`return { theValue: ${objectKey}}`),
+        Ensure.that(LastScriptExecution.result<{ theValue: object }>().isPresent(), isTrue()),
+        Ensure.that(LastScriptExecution.result<{ theValue: object }>().theValue, equals(JSON.parse(expectedJson))),
+    )
+);

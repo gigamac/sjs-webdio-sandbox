@@ -9,19 +9,29 @@ Feature: querying a mock page
 
   Scenario Outline: Opening a mock page to check a js
 
-    ["The Internet"](https://the-internet.herokuapp.com/) is an example application
-    that captures prominent and ugly functionality found on the web.
-    Perfect for writing automated acceptance tests against 😎
-
-    Note: With **Serenity/JS** you can use [Markdown](https://en.wikipedia.org/wiki/Markdown)
-    to better describe each `Feature` and `Scenario`.
-
-
     Then he should run a script to retrieve object "<objectKey>" with "<value>"
 
-#    And he should see the object has value "<value>"
+    #    And he should see the object has value "<value>"
 
     Examples:
       | objectKey               | value  |
       | foodieObject.menu.carbs | potato |
       | foodieObject.menu.carbs | gnocci |
+
+  Scenario Outline: Opening a mock page passing an object to check a js
+
+    Then he should run a script to retrieve object "<objectKey>" with:
+      """
+      {
+        "prots": "butterbeans",
+        "carbs": "<carb>",
+        "veg": "broccoli"
+      }
+      """
+
+    #    And he should see the object has value "<value>"
+
+    Examples:
+      | objectKey         | carb |
+      | foodieObject.menu | gnocci|
+      | foodieObject.menu | potato|
