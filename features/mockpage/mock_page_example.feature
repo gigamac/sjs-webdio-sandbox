@@ -17,9 +17,9 @@ Feature: querying a mock page
     to better describe each `Feature` and `Scenario`.
 
 
-    Then he should run a script to retrieve object "<objectKey>"
+    Then he should run a script to retrieve object "<objectKey>" with "<value>"
 
-    And he should see the object has value "<value>"
+#    And he should see the object has value "<value>"
 
     Examples:
       | objectKey               | value  |

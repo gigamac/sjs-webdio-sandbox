@@ -48,10 +48,11 @@ Then('{pronoun} should see that authentication has {word}', async (pronoun, expe
     )}
 );
 
-Then('{pronoun} should run a script to retrieve object {string}', (pronoun, objectKey: string)=>
+Then('{pronoun} should run a script to retrieve object {string} with {string}', (pronoun, objectKey: string, expectedValue: string)=>
     actorInTheSpotlight().attemptsTo(
         ExecuteScript.sync(`return { theValue: ${objectKey}}`),
-        Ensure.that(LastScriptExecution.result<{ theValue: string }>().isPresent(), isTrue())
+        Ensure.that(LastScriptExecution.result<{ theValue: string }>().isPresent(), isTrue()),
+        Ensure.that(LastScriptExecution.result<{ theValue: string }>().theValue, equals(expectedValue)),
     )
 );
 
